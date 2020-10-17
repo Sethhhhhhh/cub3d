@@ -18,12 +18,14 @@ int				s_is_map_parsing(t_g *g)
 	|| !g->parse.west || !g->parse.sprite || !g->parse.floor
 	|| !g->parse.ceiling || (g->parse.size.w == -1) || (g->parse.size.h == -1))
 		s_error(g, "	Parsing: bad position of the map file\
- or invalid input.\n");
+	or invalid input.\n");
 	return (1);
 }
 
 static void		s_init(t_g *g)
 {
+	g->mlx.save = 0;
+	g->parse.size_grid_y = 0;
 	g->mlx.texture[0].ptr = NULL;
 	g->mlx.texture[1].ptr = NULL;
 	g->mlx.texture[2].ptr = NULL;
@@ -41,7 +43,7 @@ static void		s_init(t_g *g)
 	g->parse.map = NULL;
 	g->mlx.ray.z_buffer = NULL;
 	g->parse.floor = -1;
-	g->parse.ceiling = -1;	
+	g->parse.ceiling = -1;
 	g->parse.size.w = -1;
 	g->parse.size.h = -1;
 }
@@ -69,8 +71,6 @@ int				main(int ac, char **av)
 	int	fd;
 
 	s_init(&g);
-	g.mlx.save = 0;
-	g.parse.size_grid_y = 0;
 	if (ac < 2)
 		s_error(&g, "	Main: Arguments are missing.\n	[Usage]:\
 	./cub3d <map.cub> [--save]\n");
