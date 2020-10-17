@@ -80,8 +80,8 @@ int			s_init_image(t_g *g)
 	* g->parse.size.w)))
 		s_error(g, "	Raycasting: the malloc has failed [z_buffer].\n");
 	s_setup(g);
-	mlx_hook(g->mlx.win, 2, 0, s_keypress, g);
-	mlx_hook(g->mlx.win, 3, 0, s_keyrelease, g);
+	mlx_hook(g->mlx.win, 2, 1L<<0, s_keypress, g);
+	mlx_hook(g->mlx.win, 3, 1L<<1, s_keyrelease, g);
 	mlx_hook(g->mlx.win, 17, 0, s_close, g);
 	mlx_loop_hook(g->mlx.ptr, s_loop, g);
 	mlx_loop(g->mlx.ptr);

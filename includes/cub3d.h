@@ -23,10 +23,10 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define FORWARD         		1
-# define DOWN            		2
-# define ROTATE_LEFT			4
-# define ROTATE_RIGHT			8
+# define FORWARD         		119
+# define DOWN            		115
+# define ROTATE_LEFT			100
+# define ROTATE_RIGHT			97
 # define ECHAP				6553
 
 typedef struct	s_pos
