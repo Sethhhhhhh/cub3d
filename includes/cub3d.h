@@ -13,17 +13,21 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include <math.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define FORWARD         		13
-# define DOWN            		1
-# define ROTATE_LEFT				2
-# define ROTATE_RIGHT			0
-# define ECHAP					53
+# define FORWARD         		1
+# define DOWN            		2
+# define ROTATE_LEFT			4
+# define ROTATE_RIGHT			8
+# define ECHAP				6553
 
 typedef struct	s_pos
 {

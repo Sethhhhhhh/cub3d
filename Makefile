@@ -1,14 +1,18 @@
 NAME		=	cub3d
 
+HEADER		=	./includes/
+
 LIBFT		=	libft/libft.a
 
-MLX		=	libmlx.a
+MLX		=	mlx/libmlx.a
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+MLX_MAC		=	-lmlx -framework OpenGL -framework AppKit
+
+MLX_LINUX	=	-lm -lbsd -lX11 -lXext
 
 CC		=	gcc
 
-HEADER		=	includes/cub3d.h
+FLAGS		=	-Werror -Wall -Wextra -I $(HEADER)
 
 SRCS		=	srcs/s_cub3d.c \
 			srcs/parsing/s_parse.c \
@@ -24,28 +28,28 @@ SRCS		=	srcs/s_cub3d.c \
 			srcs/engine/s_free.c \
 			srcs/engine/s_bmp.c \
 
-OBJ		=	${SRCS:.c=.o}
+OBJS		=	$(SRCS:.c=.o)
 
-.c.o		:
-			${CC} -c -I ${HEADER} $< -o ${<:.c=.o}
+all		:	setup $(NAME)
 
-all		:	${NAME}
+$(NAME)		:	$(OBJS) $(LIBFT) $(MLX)
+			$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MLX) $(MLX_LINUX)
 
-${NAME}		:	${OBJ} ${HEADER} map.cub
-			make bonus -C libft
-			make -C mlx
-			cp mlx/${MLX} .
-			$(CC) ${LIBFT} ${MLX} ${OBJ} -o ${NAME}
+$(LIBFT)	:
+			make -C ./libft
+
+$(MLX)		:
+			make -C ./mlx
+
+setup		:
+			@sudo cp mlx/mlx.h /usr/local/include
+
 
 clean		:
-			rm -f ${OBJ}
-			make clean -C libft
-			make clean -C mlx
+			make clean -C ./libft
 
 fclean		:	clean
-			rm -rf ${NAME}
-			make fclean -C libft
-			rm ${MLX}
+			rm $(NAME)
 
-re			:	fclean all
+re		:	fclean all
 

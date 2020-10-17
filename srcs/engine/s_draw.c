@@ -74,7 +74,7 @@ void		s_draw_sprite(t_g *g, int sprite_id, int i)
 		g->mlx.sprites[sprite_id].color =
 		g->mlx.texture[4].data[g->mlx.sprites[sprite_id].texture.y
 		* 64 + g->mlx.sprites[sprite_id].texture.x];
-		if (g->mlx.sprites[sprite_id].color != 0)
+		if (g->mlx.sprites[sprite_id].color != 0x1000000)
 			s_draw_pixel(g, i, j, g->mlx.sprites[sprite_id].color);
 	}
 }
