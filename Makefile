@@ -32,7 +32,7 @@ OBJS		=	$(SRCS:.c=.o)
 
 all		:	setup $(NAME)
 
-$(NAME)		:	$(OBJS) $(LIBFT) $(MLX)
+$(NAME)		:	$(OBJS) $(LIBFT) $(MLX) $(HEADER)
 			$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MLX) $(MLX_LINUX)
 
 $(LIBFT)	:

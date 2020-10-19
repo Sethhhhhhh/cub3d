@@ -125,7 +125,6 @@ void		s_parse(t_g *g, int fd)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (line && *line != '\0')
-		{
 			if ((ret = s_check(line, g)) == -1 && ft_strchr(" 102NSEW", *line))
 			{
 				if (s_is_map_parsing(g))
@@ -136,8 +135,8 @@ void		s_parse(t_g *g, int fd)
 			}
 			else if (ret == -1)
 				s_error(g, "	Parsing: bad id.\n");
-		}
 		lb = (lb && *line == '\0') ? 2 : lb;
 		free(line);
 	}
+	free(line);
 }

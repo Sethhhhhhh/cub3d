@@ -88,15 +88,15 @@ static void	s_copy_line(t_g *g, char ***tmp, int count, int ml)
 
 int			s_parse_map(t_g *g, char *line, int *count, int *ml)
 {
-	char		**tmp;
-	char		*new;
-	int			length;
+	char	**tmp;
+	char	*new;
+	int		length;
 
 	new = NULL;
 	if (!(line = s_check(g, (*count), line)))
 		s_error(g, "	Parsing: the parsing failed.\n");
 	tmp = (*count) >= 1 ? g->parse.map : NULL;
-	if (!((g->parse.map) = (char **)malloc(sizeof(char *) * (*count) + 1)))
+	if (!((g->parse.map) = (char **)malloc(sizeof(char *) * (*count + 1) + 1)))
 		s_error(g, "	Parsing: the malloc failed [g->parse.map].\n");
 	if ((length = ft_strlen(line)) > (*ml))
 		(*ml) = length;
