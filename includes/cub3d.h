@@ -23,11 +23,13 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-# define FORWARD         		119
-# define DOWN            		115
-# define ROTATE_LEFT			100
-# define ROTATE_RIGHT			97
-# define ECHAP				6553
+# define FORWARD		119
+# define DOWN			115
+# define LEFT			100
+# define RIGHT			97
+# define ROTATE_LEFT	65363
+# define ROTATE_RIGHT	65361
+# define ECHAP			65307
 
 typedef struct	s_pos
 {
@@ -64,7 +66,7 @@ typedef struct	s_parse
 	char		*sprite;
 	int			floor;
 	int			ceiling;
-	int			size_grid_y;
+	int			lcount;
 	int			count_sprite;
 }				t_parse;
 
@@ -75,6 +77,8 @@ typedef struct	s_player
 	double		r_speed;
 	int			forward;
 	int			back;
+	int			left;
+	int			right;
 	int			r_left;
 	int			r_right;
 
@@ -161,6 +165,7 @@ typedef struct	s_g
 
 void			s_parse(t_g *g, int fd);
 int				s_parse_map(t_g *g, char *line, int *count, int *ml);
+char			*s_check_line(t_g *g, int count, char *line);
 
 int				s_init_image(t_g *g);
 int				s_close(t_g *g);
@@ -177,8 +182,6 @@ void			s_move_and_rotate(t_g *g);
 int				s_keypress(int keycode, t_g *g);
 int				s_keyrelease(int keycode, t_g *g);
 void			s_move(t_g *g);
-void			s_rotate_left(t_g *g);
-void			s_rotate_right(t_g *g);
 
 int				s_raycast(t_g *g);
 

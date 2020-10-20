@@ -14,13 +14,21 @@
 
 static void	s_setup(t_g *g)
 {
+	int		i;
+
+	i = -1;
+	while (++i < g->parse.lcount)
+		if (!(g->parse.map[i] = s_check_line(g, i, g->parse.map[i])))
+			s_error(g, "	Parsing: the is not correctly closed or is\
+	not composed only of [012NSEW].\n");
 	g->mlx.player.forward = 0;
 	g->mlx.player.back = 0;
 	g->mlx.player.r_left = 0;
 	g->mlx.player.r_right = 0;
-	if (g->parse.size_grid_y == 0)
+	g->mlx.player.left = 0;
+	g->mlx.player.right = 0;
+	if (g->parse.lcount == 0)
 		s_error(g, "	Parsing: unknow map.\n");
-	g->parse.size_grid_y--;
 	if (g->parse.floor == -1 || g->parse.ceiling == -1)
 		s_error(g, "	Parsing: the color is not correct.\n	[Usage]:\
 		r[0-255], g[0-255], b[0-255]\n");
@@ -80,9 +88,9 @@ int			s_init_image(t_g *g)
 	* g->parse.size.w)))
 		s_error(g, "	Raycasting: the malloc has failed [z_buffer].\n");
 	s_setup(g);
+	mlx_hook(g->mlx.win, 33, 1L << 17, s_close, g);
 	mlx_hook(g->mlx.win, 2, 1L << 0, s_keypress, g);
 	mlx_hook(g->mlx.win, 3, 1L << 1, s_keyrelease, g);
-	mlx_hook(g->mlx.win, 33, 1L << 17, s_close, g);
 	mlx_loop_hook(g->mlx.ptr, s_loop, g);
 	mlx_loop(g->mlx.ptr);
 	return (1);

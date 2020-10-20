@@ -19,7 +19,7 @@ static void	s_free_map(t_g *g)
 	i = 0;
 	if (g->parse.map)
 	{
-		while (i < g->parse.size_grid_y)
+		while (i < g->parse.lcount)
 		{
 			if (g->parse.map[i] != NULL)
 				free(g->parse.map[i]);

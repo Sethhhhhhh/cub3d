@@ -15,8 +15,9 @@
 int				s_is_map_parsing(t_g *g)
 {
 	if (!g->parse.north || !g->parse.south || !g->parse.east
-	|| !g->parse.west || !g->parse.sprite || !g->parse.floor
-	|| !g->parse.ceiling || (g->parse.size.w == -1) || (g->parse.size.h == -1))
+	|| !g->parse.west || !g->parse.sprite || g->parse.floor == -1
+	|| g->parse.ceiling == -1 || (g->parse.size.w == -1)
+	|| (g->parse.size.h == -1))
 		s_error(g, "	Parsing: bad position of the map file\
 	or invalid input.\n");
 	return (1);
@@ -25,7 +26,7 @@ int				s_is_map_parsing(t_g *g)
 static void		s_init(t_g *g)
 {
 	g->mlx.save = 0;
-	g->parse.size_grid_y = 0;
+	g->parse.lcount = 0;
 	g->mlx.texture[0].ptr = NULL;
 	g->mlx.texture[1].ptr = NULL;
 	g->mlx.texture[2].ptr = NULL;

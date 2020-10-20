@@ -54,7 +54,7 @@ static void	s_count_sprite(t_parse *parse)
 
 	parse->count_sprite = 0;
 	y = 0;
-	while (y < parse->size_grid_y)
+	while (y < parse->lcount)
 	{
 		x = 0;
 		while (parse->map[y][x])
@@ -80,7 +80,7 @@ void		s_get_sprites(t_g *g)
 		sprite table [g->mlx.sprites].\n");
 	y = 0;
 	sprite_id = 0;
-	while (y < g->parse.size_grid_y)
+	while (y < g->parse.lcount)
 	{
 		x = -1;
 		while (g->parse.map[y][++x])

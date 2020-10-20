@@ -30,9 +30,9 @@ SRCS		=	srcs/s_cub3d.c \
 
 OBJS		=	$(SRCS:.c=.o)
 
-all		:	setup $(NAME)
+all		:	$(NAME)
 
-$(NAME)		:	$(OBJS) $(LIBFT) $(MLX) $(HEADER)
+$(NAME)		:	$(OBJS) $(LIBFT) $(MLX) $(HEADER) map.cub
 			$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(MLX) $(MLX_LINUX)
 
 $(LIBFT)	:
@@ -41,15 +41,14 @@ $(LIBFT)	:
 $(MLX)		:
 			make -C ./mlx
 
-setup		:
-			@sudo cp mlx/mlx.h /usr/local/include
-
-
 clean		:
+			rm -rf $(OBJS)
 			make clean -C ./libft
+			make clean -C ./mlx
 
 fclean		:	clean
 			rm $(NAME)
+			make fclean -C ./libft
 
 re		:	fclean all
 

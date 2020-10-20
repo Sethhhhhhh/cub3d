@@ -67,10 +67,11 @@ static int	s_set_colors(t_g *g, char *line, int *color, int index)
 	int color_base;
 	int	check;
 
-	check = 0;
-	if (!index && line++)
-		if (*color != -1 && !(*color = 0))
-			s_error(g, "	Parsing: 2 colors in map file.\n");
+	if (!(check = 0) && !index && line++)
+		if (*color != -1)
+			s_error(g, "	Parsing: 2 colors in map file or bad input.\n");
+		else
+			*color = 0;
 	while (*line && (ft_isspace(*line) || *line == ','))
 		line++;
 	color_base = 0;
@@ -85,8 +86,8 @@ static int	s_set_colors(t_g *g, char *line, int *color, int index)
 		*color += index == 1 ? color_base * 256 : color_base;
 	if (index <= 1)
 		s_set_colors(g, line, color, index + 1);
-	else if (ft_strlen(line) > 1)
-		s_error(g, "	Parsing: bad input.\n");
+	else if (ft_strlen(line) > 0)
+		s_error(g, "	Parsing: Only 3 inputs in color.\n");
 	return (1);
 }
 
@@ -128,9 +129,8 @@ void		s_parse(t_g *g, int fd)
 			if ((ret = s_check(line, g)) == -1 && ft_strchr(" 102NSEW", *line))
 			{
 				if (s_is_map_parsing(g))
-					if (s_parse_map(g, line, &g->parse.size_grid_y, &ml)
-					&& lb == 2)
-						s_error(g, "	Parsing: the wap is wrong.");
+					if (s_parse_map(g, line, &g->parse.lcount, &ml) && lb == 2)
+						s_error(g, "	Parsing: the map is wrong.");
 				lb = 1;
 			}
 			else if (ret == -1)

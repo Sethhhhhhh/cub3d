@@ -66,4 +66,5 @@ void		s_bmp(t_g *g)
 	s_header(g, &bmp);
 	s_image(g, &bmp);
 	close(bmp.fd);
+	free(bmp.header);
 }
